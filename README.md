@@ -46,18 +46,23 @@ TBD
 
 ## Running the tests
 
+Run command on the solution file (.sln) folder :
+
 ```
-TBD
+dotnet test
 ```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+TBD
 
 ## Built With
 
-* [.NET Core](https://dotnet.microsoft.com/download)
-* [Fluent Assertions](https://fluentassertions.com/)
+* [.NET Core](https://dotnet.microsoft.com/download) - *Software Developmet Kit (SDK)*
+* [Visual Studio Code](https://code.visualstudio.com/) - *Integrated Development Environment (IDE)*
+* [xUnit.net](https://xunit.net/) - *Unit Test Framework*
+* [Fluent Assertions](https://fluentassertions.com/) - *Unit Test Assertions Extension Methods*
+
 
 ## Versioning
 
