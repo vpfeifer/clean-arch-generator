@@ -18,31 +18,19 @@ namespace CleanArchGen.IntegrationTests.Infra.FileSystem
         [Fact]
         public void Create_ShouldCreateFolder_WhenPathIsValid()
         {
-            _dirCreator.Create("testFolder");
+            var folderName = "testFolder";
 
-            var dirInfo =  new DirectoryInfo("testFolder");
+            _dirCreator.CreateAndSetAsCurrentPath(folderName);
 
-            dirInfo.Exists.Should().BeTrue();
+            Environment.CurrentDirectory.Should().Contain(folderName);
         }
 
         [Fact]
-        public void Create_ShouldThrowException_WhenPathIsInvalid()
+        public void Create_ShouldThrowArgumentNullException_WhenPathIsNull()
         {
             Assert.Throws<ArgumentNullException>(() =>
-                _dirCreator.Create(null)
+                _dirCreator.CreateAndSetAsCurrentPath(null)
             );
-        }
-
-        [Fact]
-        public void Create_ShouldNotThrowException_WhenDirectoryAlreadyExists()
-        {
-            _dirCreator.Create("testFolder");
-            
-            _dirCreator.Create("testFolder");
-
-            var dirInfo =  new DirectoryInfo("testFolder");
-
-            dirInfo.Exists.Should().BeTrue();
         }
     }
 }

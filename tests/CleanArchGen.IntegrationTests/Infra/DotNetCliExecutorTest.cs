@@ -1,7 +1,6 @@
 using System;
 using System.IO;
-using System.Threading.Tasks;
-using CleanArchGen.Infra;
+using CleanArchGen.Infra.CommandLine;
 using CleanArchGen.Infra.Exceptions;
 using FluentAssertions;
 using Xunit;
@@ -18,24 +17,33 @@ namespace CleanArchGen.IntegrationTests.Infra
         }
 
         [Fact]
-        public void ExecuteAsync_ShouldExecuteWithSuccess_WhenDotNetCommandIsValid()
+        public void CreateSolutionFile_ShouldExecuteWithSuccess_WhenPathAndNameAreValid()
         {
-            _dotnetCli.Execute("new sln -n teste --force");
+            _dotnetCli.CreateSolutionFile("testePath", "teste");
 
-            var slnExists = File.Exists("teste.sln");
+            var slnExists = File.Exists("testePath/teste.sln");
 
             slnExists.Should().BeTrue();
         }
 
         [Fact]
-        public void ExecuteAsync_ShouldThrowsException_WhenDotNetCommandIsInvalid()
+        public void CreateSolutionFile_ShouldExecuteWithSuccess_WhenPathIsInvalid()
         {
-            var command = "invalidcommand";
+            var invalidPath = "   ";
 
-            Action act = () => _dotnetCli.Execute(command);
+            Action act = () => _dotnetCli.CreateSolutionFile(invalidPath, "teste");
             
-            act.Should().Throw<ErrorExecutingDotNetCommandException>()
-                .And.Message.Should().Contain(command);
+            act.Should().Throw<CouldNotCreateSolutionFileException>();
+        }
+
+        [Fact]
+        public void CreateSolutionFile_ShouldExecuteWithSuccess_WhenNameIsInvalid()
+        {
+            var invalidName = "   ";
+
+            Action act = () => _dotnetCli.CreateSolutionFile("testePath", invalidName);
+            
+            act.Should().Throw<CouldNotCreateSolutionFileException>();
         }
     }
 }

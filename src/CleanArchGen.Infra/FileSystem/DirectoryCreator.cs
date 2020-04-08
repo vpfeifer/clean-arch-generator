@@ -1,28 +1,19 @@
 ﻿using System;
 using System.IO;
+using CleanArchGen.Domain.Interfaces;
 
 namespace CleanArchGen.Infra.FileSystem
 {
-    public class DirectoryCreator
+    public class DirectoryCreator : IDirectoryCreator
     {
-        public void Create(string path)
+        public void CreateAndSetAsCurrentPath(string path)
         {
-            try 
+            if (!Directory.Exists(path)) 
             {
-                if (Directory.Exists(path)) 
-                {
-                    Console.WriteLine($"The path '{path}' already exists.");
-                    return;
-                }
-
                 Directory.CreateDirectory(path);
-                Console.WriteLine($"The directory {path} was created.");
-            } 
-            catch (Exception e)
-            {
-                Console.WriteLine($"Could not create directory {path}: {e.ToString()}");
-                throw e;
-            } 
-        }   
+            }
+
+            Environment.CurrentDirectory = path;
+        }
     }
 }

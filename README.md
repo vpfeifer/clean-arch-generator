@@ -4,7 +4,15 @@ CleanArchGen is a tool to generate a scaffolding .Net Core project based on the 
 
 [The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) - *Uncle Bob*
 
-Tired to run dotnet run command to scaffold projects? CleanArchGen will help you, see how in the Features section below.
+Tired to run dotnet command or use plugins to scaffold projects? CleanArchGen will help you, see how in the Features section below.
+
+CleanArchGen will deliver an application running in the following architecture :
+
+![CleanArchGen Image](images/CleanArchGen.png)
+
+This architecture was inspired on Herberto Graca [article](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/), where I found this beautiful image:
+
+![CleanArchHerberto](images/CleanArchHerberto.png)
 
 ## Features
 
@@ -14,7 +22,7 @@ Tired to run dotnet run command to scaffold projects? CleanArchGen will help you
     - Create Application layer
     - Create Infra layer
     - Create Api or Console layer
-    - Add projects into solution
+    - Add projects on solution
     - Reference projects
         - Application -> Domain
         - Infra -> Application
@@ -62,17 +70,17 @@ TBD
 * [Visual Studio Code](https://code.visualstudio.com/) - *Integrated Development Environment (IDE)*
 * [xUnit.net](https://xunit.net/) - *Unit Test Framework*
 * [Fluent Assertions](https://fluentassertions.com/) - *Unit Test Assertions Extension Methods*
-
+* [Moq](https://github.com/moq/moq4) - *The most popular mocking library for .NET*
 
 ## Versioning
 
-TBD 
+TBD
 
 ## Authors
 
 * **Vinicius Pfeifer**
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/vpfeifer/clean-arch-generator/graphs/contributors) who participated in this project.
 
 ## License
 

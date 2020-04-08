@@ -1,15 +1,29 @@
 using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
+using CleanArchGen.Domain.Interfaces;
 using CleanArchGen.Infra.Exceptions;
 
-namespace CleanArchGen.Infra
+namespace CleanArchGen.Infra.CommandLine
 {
-    public class DotNetCliExecutor
+    public class DotNetCliExecutor : IDotNetClient
     {
         private Process _process;
 
-        public void Execute(string command)
+        public void CreateSolutionFile(string path, string name)
+        {
+            var createSolutionCommand = $"new sln -o {path} -n {name} --force";
+
+            try
+            {
+               Execute(createSolutionCommand);
+            }
+            catch(Exception)
+            {
+                throw new CouldNotCreateSolutionFileException(createSolutionCommand);
+            }
+        }
+
+        private void Execute(string command)
         {
             using (_process = new Process())
             {
