@@ -1,12 +1,11 @@
+using CleanArchGen.Domain.Interfaces;
+
 namespace CleanArchGen.Domain.DefaultLayers
 {
-    public class DomainLayer : IDefaultLayer
+    public sealed class DomainLayer : DefaultLayer
     {
-        public string Name => "Domain";
+        public DomainLayer(IDotNetClient dotNetClient) : base(dotNetClient){}
 
-        public void Create()
-        {
-            throw new System.NotImplementedException();
-        }
+        protected override string GetLayerName() => "Domain";
     }
 }

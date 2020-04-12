@@ -7,19 +7,46 @@ namespace CleanArchGen.Infra.CommandLine
 {
     public class DotNetCliExecutor : IDotNetClient
     {
+        private readonly ICommandBuilder _commandBuilder;
         private Process _process;
 
-        public void CreateSolutionFile(string path, string name)
+        public DotNetCliExecutor(ICommandBuilder commandBuilder)
         {
-            var createSolutionCommand = $"new sln -o {path} -n {name} --force";
+            _commandBuilder = commandBuilder;
+        }
 
+        public void CreateClassLibProject(string path, string projectName)
+        {
+            var command = _commandBuilder.NewClassLib()
+                                .WithPath(path)
+                                .WithName(projectName)
+                                .WithNoRestore()
+                                .WithForce()
+                                .Build();
+
+            TryExecute(command);
+        }
+
+        public void CreateSolutionFile(string path, string fileName)
+        {
+            var command = _commandBuilder.NewSolution()
+                                .WithPath(path)
+                                .WithName(fileName)
+                                .WithForce()
+                                .Build();
+
+            TryExecute(command);
+        }
+
+        private void TryExecute(string command)
+        {
             try
             {
-               Execute(createSolutionCommand);
+                Execute(command);
             }
-            catch(Exception)
+            catch (Exception)
             {
-                throw new CouldNotCreateSolutionFileException(createSolutionCommand);
+                throw new ErrorExecutingDotNetCommandException(command);
             }
         }
 
@@ -32,7 +59,7 @@ namespace CleanArchGen.Infra.CommandLine
                 _process.StartInfo.CreateNoWindow = true;
                 _process.StartInfo.RedirectStandardOutput = true;
                 _process.Start();
-                
+
                 _process.WaitForExit();
 
                 if (_process.HasExited && _process.ExitCode != 0)

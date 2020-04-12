@@ -8,27 +8,22 @@ namespace CleanArchGen.Application.UseCases
     {
         private readonly IEnumerable<IDefaultLayer> _defaultLayers;
         private readonly ISolution _solution;
-        private readonly IDirectoryCreator _directoryCreator;
 
-        public CreateWebApiUseCase(IEnumerable<IDefaultLayer> defaultLayers, ISolution solution, IDirectoryCreator directoryCreator)
+        public CreateWebApiUseCase(IEnumerable<IDefaultLayer> defaultLayers, ISolution solution)
         {
             _defaultLayers = defaultLayers;
             _solution = solution;
-            _directoryCreator = directoryCreator;
         }
 
         public void Create(string path, string name)
         {
             _solution.Create(path, name);
 
-            _directoryCreator.CreateAndSetAsCurrentPath("src");
-
-            // Create Domain, Application, Infra layers
-            // foreach (var layer in _defaultLayers)
-            // {
-            //     layer.Create(project);
-            // }
-
+            //Create Domain, Application, Infra layers
+            foreach (var layer in _defaultLayers)
+            {
+                layer.Create(path, name);
+            }
 
             // Create Web Api
 

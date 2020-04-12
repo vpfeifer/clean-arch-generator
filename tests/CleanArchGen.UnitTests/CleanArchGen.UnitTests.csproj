@@ -12,10 +12,12 @@
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
+    <PackageReference Include="FluentAssertions" Version="5.10.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\CleanArchGen.Application\CleanArchGen.Application.csproj" />
+    <ProjectReference Include="..\..\src\CleanArchGen.Infra\CleanArchGen.Infra.csproj" />
   </ItemGroup>
 
 </Project>
