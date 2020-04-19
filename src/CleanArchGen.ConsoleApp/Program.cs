@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace CleanArchGen.ConsoleApp
 {
@@ -6,6 +7,8 @@ namespace CleanArchGen.ConsoleApp
     {
         static void Main(string[] args)
         {
+            ServiceProvider provider = Bootstrapper.ResolveAppDependencies();
+
             Console.WriteLine("Hello World!");
         }
     }

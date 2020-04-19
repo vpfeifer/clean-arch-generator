@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using CleanArchGen.Application.Interfaces;
 using CleanArchGen.Domain.DefaultLayers;
 using CleanArchGen.Domain.Interfaces;
 
 namespace CleanArchGen.Application.UseCases
 {
-    public class CreateWebApiUseCase
+    public class CreateWebApiUseCase : ICreateWebApiUseCase
     {
         private readonly IEnumerable<IDefaultLayer> _defaultLayers;
         private readonly ISolution _solution;
