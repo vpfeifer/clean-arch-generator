@@ -205,5 +205,17 @@ namespace CleanArchGen.UnitTests.Infra.CommandLine
 
             result.Should().Be(expectedCommand);
         }
+
+        [Fact]
+        public void BuildNewWebApi_ShouldReturnCommand()
+        {
+            var expectedCommand = "new webapi";
+
+            var result = new DotNetCommandBuilder()
+                .NewWebApi()
+                .Build();
+
+            result.Should().Be(expectedCommand);
+        }
     }
 }

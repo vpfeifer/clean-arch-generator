@@ -4,6 +4,7 @@ namespace CleanArchGen.Infra.CommandLine
     {
         ICommandBuilder NewSolution();
         ICommandBuilder NewClassLib();
+        ICommandBuilder NewWebApi();
         ICommandBuilder WithPath(string path);
         ICommandBuilder WithName(string name);
         ICommandBuilder WithNoRestore();

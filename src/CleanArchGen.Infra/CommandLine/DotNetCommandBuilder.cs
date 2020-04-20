@@ -18,6 +18,11 @@ namespace CleanArchGen.Infra.CommandLine
             return AddDefaultCommand("new classlib");
         }
 
+        public ICommandBuilder NewWebApi()
+        {
+            return AddDefaultCommand("new webapi");
+        }
+
         public ICommandBuilder WithPath(string path)
         {
             var parameter = $" -o {path}";

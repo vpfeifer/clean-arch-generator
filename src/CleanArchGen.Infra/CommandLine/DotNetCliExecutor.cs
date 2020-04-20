@@ -15,6 +15,17 @@ namespace CleanArchGen.Infra.CommandLine
             _commandBuilder = commandBuilder;
         }
 
+        public void CreateSolutionFile(string path, string fileName)
+        {
+            var command = _commandBuilder.NewSolution()
+                                .WithPath(path)
+                                .WithName(fileName)
+                                .WithForce()
+                                .Build();
+
+            TryExecute(command);
+        }
+
         public void CreateClassLibProject(string path, string projectName)
         {
             var command = _commandBuilder.NewClassLib()
@@ -27,11 +38,12 @@ namespace CleanArchGen.Infra.CommandLine
             TryExecute(command);
         }
 
-        public void CreateSolutionFile(string path, string fileName)
+        public void CreateWebApiProject(string path, string projectName)
         {
-            var command = _commandBuilder.NewSolution()
+            var command = _commandBuilder.NewWebApi()
                                 .WithPath(path)
-                                .WithName(fileName)
+                                .WithName(projectName)
+                                .WithNoRestore()
                                 .WithForce()
                                 .Build();
 
