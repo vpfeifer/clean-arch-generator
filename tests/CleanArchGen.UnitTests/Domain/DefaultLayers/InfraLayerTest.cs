@@ -18,7 +18,7 @@ namespace CleanArchGen.UnitTests.Domain.DefaultLayers
             var projectName = "FooProject";
 
             var expectedFolder = $"{testFolder}/src";
-            var expectedName = $"{projectName}.Application";
+            var expectedName = $"{projectName}.Infra";
 
             domainLayer.Create(testFolder, projectName);
 
