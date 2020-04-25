@@ -8,6 +8,9 @@ nupkg/
 # Visual Studio Code
 .vscode
 
+# Coverage folder
+TestResults/
+
 # User-specific files
 *.suo
 *.user
