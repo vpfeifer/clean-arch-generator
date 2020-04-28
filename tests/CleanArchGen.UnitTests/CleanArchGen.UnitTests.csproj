@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\CleanArchGen.Domain\CleanArchGen.Domain.csproj" />
     <ProjectReference Include="..\..\src\CleanArchGen.Application\CleanArchGen.Application.csproj" />
     <ProjectReference Include="..\..\src\CleanArchGen.Infra\CleanArchGen.Infra.csproj" />
   </ItemGroup>
