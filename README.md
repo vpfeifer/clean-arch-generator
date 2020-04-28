@@ -60,6 +60,18 @@ Run command on the solution file (.sln) folder :
 dotnet test
 ```
 
+## Running the mutation tests
+
+If you don't have dotnet-stryker installed, go to the root of the project and run 
+```
+dotnet tool restore
+```
+
+On tests/CleanArchGen.UnitTests run 
+```
+dotnet stryker --project-file=[projectfile]
+```
+
 ## Deployment
 
 TBD
