@@ -1,28 +1,41 @@
-name: CI
+name: Coverage
 
 on:
   push:
     branches:
       - master
-    tags:
-      - 'v*.*.*'
 
 jobs:
-
-  build:
+  test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test_layer:
+          - IntegrationTests
+          - UnitTests
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@master
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.0.100
+        dotnet-version: 3.1.100
     - name: Generate coverage report
-      run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=./TestResults/ /p:CoverletOutputFormat=lcov
-    - name: Publish coverage report to coveralls.io
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=./TestResults/ /p:CoverletOutputFormat=lcov ./tests/CleanArchGen.${{ matrix.test_layer }}
+    - name: Generate report for ${{ matrix.test_layer }}
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./TestResults/coverage.info 
+        flag-name: run-${{ matrix.test_layer }}
+        path-to-lcov: ./tests/CleanArchGen.${{ matrix.test_layer }}/TestResults/coverage.info
+        parallel: true
+  finish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls Finished
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.github_token }}
+        parallel-finished: true
     
